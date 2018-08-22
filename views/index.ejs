@@ -8,7 +8,54 @@
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <script src="main.js"></script>
 </head>
-<h1>Test</h1>
+
+<h2>Get weights</h2>
+<p>Select exercise:</p>
+
+<h2>New entry</h2>
+<form action="/exercises" method="POST">
+    <label for="exercise_name">Exercise name:</label>
+    <input type="text" name="exercise_name" placeholder="Bench press" />
+    <label for="gym_name">Gym:</label>
+    <input type="text" name="gym_name" placeholder="Virgin Active Raffles" value="`default_gym`" />
+    <label for="weight_kg">Weight in kg:</label>
+    <input type="text" name="weight_kg" placeholder="15" value="15" />
+    <label for="sets_number">No of Sets:</label>
+    <input type="text" name="sets_number" placeholder="3" value="3" />
+    <label for="reps_number">No of Reps:</label>
+    <input type="text" name="reps_number" placeholder="8" value="8" />
+    <button type="submit">Save new entry</button>
+</form>
+
+<h2>Exercises by frequency</h2>
+<p>(dev note: make these clickable and pre-fill New entry form)</p>
+<table>
+    <tr>
+        <td style="background-color: yellow">Exercise 1</td>
+        <td style="background-color: red">Exercise 2</td>
+        <td style="background-color: yellow">Exercise 3</td>
+    </tr>
+    <tr>
+        <td style="background-color: greenyellow">Exercise 4</td>
+        <td style="background-color: orange">Exercise 5</td>
+        <td></td>
+    </tr>
+</table>
+
+<h2>My previous workouts</h2>
+<p>On DD/MM/YY (yesterday):</p>
+<ul>
+    <li>`exercise_name`: `sets_number` sets of `reps_number` reps</li>
+    <li>`exercise_name`: `sets_number` sets of `reps_number` reps</li>
+    <li>`exercise_name`: `sets_number` sets of `reps_number` reps</li>
+</ul>
+<p>On DD/MM/YY (2 days ago):</p>
+<ul>
+    <li>`exercise_name`: `sets_number` sets of `reps_number` reps</li>
+    <li>`exercise_name`: `sets_number` sets of `reps_number` reps</li>
+    <li>`exercise_name`: `sets_number` sets of `reps_number` reps</li>
+</ul>
+
 <body>
     
 </body>
