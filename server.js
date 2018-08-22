@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 
 // Configurations
+app.use(require('morgan')('dev'));
 app.set('view engine', 'ejs');
 app.use(bodyParser.json());       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
@@ -11,12 +12,10 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 
 // Routes
 app.get('/', function (req, res) {
-    console.log('GET / request received');
-    res.render('index.ejs');
+    res.render('index');
 });
 
 app.post('/exercises', function (req, res) {
-    console.log('POST /exercises request received');
     res.json(req.body);
     // res.render('index.ejs');
 });
