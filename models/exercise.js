@@ -7,7 +7,12 @@ module.exports = (sequelize, DataTypes) => {
     underscored: true
   });
   Exercise.associate = function(models) {
-    // associations can be defined here
+    Exercise.belongsTo(models.User, {
+      onDelete: "CASCADE",
+      foreignKey: {
+        allowNull: false
+      }
+    });
   };
   return Exercise;
 };

@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const models = require('./models');
 
 // Configurations
 app.use(require('morgan')('dev'));
@@ -12,12 +13,30 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 
 // Routes
 app.get('/', function (req, res) {
-    res.render('index');
+    models.User.findById(1).then((user) => {
+        user.getExercises().then((userExercises) => {
+            console.log(userExercises)
+            res.render('index', {userExercises});
+        });
+    });
 });
 
 app.post('/exercises', function (req, res) {
-    res.json(req.body);
-    // res.render('index.ejs');
+    models.Exercise.findOrCreate({
+        where: {
+            user_id: 1,
+            name: req.body.exercise_name
+        },
+        defaults: {
+            user_id: 1,
+            name: req.body.exercise_name
+        }
+    }).then((exercise, created) => {
+        res.json(exercise);
+    });
+
+
+    // res.json(req.body);
 });
 
 // Run server!

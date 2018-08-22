@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     underscored: true
   });
   User.associate = function(models) {
-    // associations can be defined here
+    User.hasMany(models.Exercise);  // enables User.getExercises()
   };
   return User;
 };
