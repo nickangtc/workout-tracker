@@ -6,6 +6,7 @@ const models = require('./models');
 // Configurations
 app.use(require('morgan')('dev'));
 app.set('view engine', 'ejs');
+app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true
@@ -15,12 +16,15 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 app.get('/', function (req, res) {
     models.User.findById(1).then((user) => {
         user.getExercises().then((userExercises) => {
-            console.log(userExercises)
+            // console.log(userExercises)
             res.render('index', {userExercises});
         });
+    }).catch(error => {
+        res.status(500).send({ error });
     });
 });
 
+// TODO: Refactor using promise resolve to eliminate nesting
 app.post('/exercises', function (req, res) {
     models.Exercise.findOrCreate({
         where: {
@@ -60,6 +64,22 @@ app.post('/exercises', function (req, res) {
 
 
     // res.json(req.body);
+});
+
+// API
+app.get('/api/exercises/latest', function (req, res) {
+    models.Workout.findAll({
+        limit: 3,
+        where: {
+            user_id: 1,
+            exercise_id: req.query.exercise_id
+        },
+        order: [['created_at', 'DESC']]
+    }).then((workouts) => {
+        res.json({workouts});
+    }).catch((error) => {
+        res.status(500).send({ error });
+    });
 });
 
 // Run server!

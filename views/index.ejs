@@ -5,20 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Hello</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="main.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="css/index.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <script src="js/index.js"></script>
 </head>
 
 <h2>Get weights</h2>
 <p>Select exercise:</p>
-<% if (userExercises) { %>
-    <%= userExercises %>
-<% } %>
+<ul>
+    <% for (var i = 0; i < userExercises.length; i++) { %>
+        <li data-exercise-id="<%= userExercises[i].id %>">
+            <%= userExercises[i].name %>
+        </li>
+    <% } %>
+</ul>
 
 <h2>New entry</h2>
 <form action="/exercises" method="POST">
     <label for="exercise_name">Exercise name:</label>
-    <input type="text" name="exercise_name" placeholder="Bench press" />
+    <input type="text" name="exercise_name" placeholder="Bench press" value="Bench press" />
     <label for="place_name">Place:</label>
     <input type="text" name="place_name" placeholder="Virgin Active Raffles" value="`default_place`" />
     <label for="weight_kg">Weight in kg:</label>
