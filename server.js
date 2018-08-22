@@ -31,8 +31,31 @@ app.post('/exercises', function (req, res) {
             user_id: 1,
             name: req.body.exercise_name
         }
-    }).then((exercise, created) => {
-        res.json(exercise);
+    }).spread((exercise) => {
+        models.Place.findOrCreate({
+            where: {
+                name: req.body.place_name,
+                type: 'hardcoded_type'
+            },
+            defaults: {
+                name: req.body.place_name,
+                type: 'hardcoded_type'
+            }
+        }).spread((place) => {
+            console.log('exercise:', exercise.id)
+            console.log('place:', place.id)
+            models.Workout.create({
+                user_id: 1,
+                place_id: place.id,
+                exercise_id: exercise.id,
+                workout_date: Date.now(),
+                reps_count: req.body.reps_count,
+                sets_count: req.body.sets_count,
+                weight_kg: req.body.weight_kg
+            }).then((workout) => {
+                res.json(workout);
+            })
+        })
     });
 
 
@@ -40,4 +63,6 @@ app.post('/exercises', function (req, res) {
 });
 
 // Run server!
+// models.sequelize.sync().then(function () {
+// });
 app.listen(process.env.PORT || 3000);

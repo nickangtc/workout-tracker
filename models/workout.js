@@ -10,7 +10,12 @@ module.exports = (sequelize, DataTypes) => {
     underscored: true
   });
   Workout.associate = function(models) {
-    // associations can be defined here
+    Workout.belongsTo(models.User, {
+      onDelete: "CASCADE",
+      foreignKey: {
+        allowNull: false
+      }
+    }); // enables Workout.getUser()
   };
   return Workout;
 };

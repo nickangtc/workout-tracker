@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
   });
   User.associate = function(models) {
     User.hasMany(models.Exercise);  // enables User.getExercises()
+    User.hasMany(models.Workout);  // enables User.getWorkouts()
   };
   return User;
 };

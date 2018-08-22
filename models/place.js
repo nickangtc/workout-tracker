@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     underscored: true
   });
   Place.associate = function(models) {
-    // associations can be defined here
+    Place.hasMany(models.Workout);
   };
   return Place;
 };

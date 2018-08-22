@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false
       }
     });
+    Exercise.hasMany(models.Workout);
   };
   return Exercise;
 };
