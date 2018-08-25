@@ -26,29 +26,23 @@ app.get('/', function (req, res) {
 
 // TODO: Refactor using promise resolve to eliminate nesting
 app.post('/exercises', function (req, res) {
-    models.Exercise.findOrCreate({
+    const exercisePromise = models.Exercise.findOrCreate({
         where: {
             user_id: 1,
             name: req.body.exercise_name
-        },
-        defaults: {
-            user_id: 1,
-            name: req.body.exercise_name
         }
-    }).spread((exercise) => {
-        models.Place.findOrCreate({
-            where: {
-                name: req.body.place_name,
-                type: 'hardcoded_type'
-            },
-            defaults: {
-                name: req.body.place_name,
-                type: 'hardcoded_type'
-            }
-        }).spread((place) => {
-            console.log('exercise:', exercise.id)
-            console.log('place:', place.id)
-            models.Workout.create({
+    });
+
+    const placePromise = models.Place.findOrCreate({
+        where: {
+            name: req.body.place_name,
+            type: 'hardcoded_type'
+        }
+    });
+
+    Promise.all([exercisePromise, placePromise])
+        .then(([[exercise], [place]]) => {
+            return models.Workout.create({
                 user_id: 1,
                 place_id: place.id,
                 exercise_id: exercise.id,
@@ -56,14 +50,12 @@ app.post('/exercises', function (req, res) {
                 reps_count: req.body.reps_count,
                 sets_count: req.body.sets_count,
                 weight_kg: req.body.weight_kg
-            }).then((workout) => {
-                res.json(workout);
             })
         })
-    });
-
-
-    // res.json(req.body);
+        .then((workout) => {
+            res.json(workout);
+        })
+        .catch(err => res.status(500).json(err));
 });
 
 // API
