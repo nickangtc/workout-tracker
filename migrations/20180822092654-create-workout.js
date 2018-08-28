@@ -35,6 +35,9 @@ module.exports = {
       workout_date: {
         type: Sequelize.DATE
       },
+      workout_date_rounded_down: {
+        type: Sequelize.DATE
+      },
       reps_count: {
         type: Sequelize.INTEGER
       },

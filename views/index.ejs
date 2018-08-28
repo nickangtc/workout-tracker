@@ -22,11 +22,11 @@
 </ul>
 
 <h2>New entry</h2>
-<form action="/exercises" method="POST">
+<form action="/workouts" method="POST">
     <label for="exercise_name">Exercise name:</label>
     <input type="text" name="exercise_name" placeholder="Bench press" value="Bench press" />
     <label for="place_name">Place:</label>
-    <input type="text" name="place_name" placeholder="Virgin Active Raffles" value="`default_place`" />
+    <input type="text" name="place_name" placeholder="Virgin Active Raffles" value="Virgin Active Raffles" />
     <label for="weight_kg">Weight in kg:</label>
     <input type="text" name="weight_kg" placeholder="15" value="15" />
     <label for="sets_count">No of Sets:</label>
@@ -52,18 +52,17 @@
 </table>
 
 <h2>My previous workouts</h2>
-<p>On DD/MM/YY (yesterday):</p>
-<ul>
-    <li>`exercise_name`: `sets_count` sets of `reps_count` reps</li>
-    <li>`exercise_name`: `sets_count` sets of `reps_count` reps</li>
-    <li>`exercise_name`: `sets_count` sets of `reps_count` reps</li>
-</ul>
-<p>On DD/MM/YY (2 days ago):</p>
-<ul>
-    <li>`exercise_name`: `sets_count` sets of `reps_count` reps</li>
-    <li>`exercise_name`: `sets_count` sets of `reps_count` reps</li>
-    <li>`exercise_name`: `sets_count` sets of `reps_count` reps</li>
-</ul>
+
+<% for (let date in workouts) { %>
+    <% const _workoutsInThisDay = workouts[date] %>
+    <p><%= momentjs(date).format('D MMMM (ddd)') %>:</p>
+    <ul>
+        <% for (let j = 0; j < _workoutsInThisDay.length; j++) { %>
+            <% const _day = _workoutsInThisDay[j] %>
+            <li><%= _day.Exercise.name %>: <%= _day.sets_count %> x <%= _day.reps_count %> x <%= _day.weight_kg %>kg</li>
+        <% } %>
+    </ul>
+<% } %>
 
 <body>
     

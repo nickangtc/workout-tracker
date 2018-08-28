@@ -8,27 +8,28 @@ $(document).ready(function () {
         $('body').append(message);
     }
 
-    const getLatestWorkoutEntriesForExercise = function (exId, done) {
+    const getLatestWorkoutEntriesByExercise = function (exId, done) {
         $.ajax({
             method: 'get',
-            url: `${apiUrl}/exercises/latest`,
+            url: `${apiUrl}/exercises/${exId}`,
             data: {
-                exercise_id: exId
+                entries: 3
             },
-            success: (data) => done(data),
+            success: (results) => done(results),
             error: (error) => handleError(error)
         });
     }
 
     $('[data-exercise-id]').click(function (ev) {
         const exId = $(this).data('exercise-id');
-        getLatestWorkoutEntriesForExercise(exId, data => {
+        getLatestWorkoutEntriesByExercise(exId, results => {
             const list = $('<ul>');
-            data.workouts.forEach((workout) => {
+            results.workouts.forEach((workout) => {
                 const text = `On ${workout.workout_date} --> ${workout.weight_kg}KG ${workout.sets_count} sets of ${workout.reps_count} reps`
                 list.append($('<li>').text(text));
             });
             $(this).append(list);
+            $(this).off('click');
         });
     });
 });
