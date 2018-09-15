@@ -118,7 +118,7 @@ app.post('/workouts', function (req, res) {
             })
         })
         .then((workout) => {
-            res.json(workout);
+            res.redirect('/');
         })
         .catch(err => res.status(500).json(err));
 });
