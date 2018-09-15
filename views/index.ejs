@@ -8,11 +8,37 @@
     <link rel="stylesheet" type="text/css" media="screen" href="css/index.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js" integrity="sha256-59IZ5dbLyByZgSsRE3Z0TjDuX7e1AiqW5bZ8Bg50dsU="
+        crossorigin="anonymous"></script>
     <script src="js/index.js"></script>
 </head>
 
+<h2>New entry</h2>
+<form action="/workouts" method="POST">
+    <p>
+        <label for="exercise_name">Exercise name:</label>
+        <input type="text" name="exercise_name" placeholder="Bench press" value="Bench press" />
+    </p>
+    <p>
+        <label for="place_name">Place:</label>
+        <input type="text" name="place_name" placeholder="Virgin Active Raffles" value="Virgin Active Raffles" />
+    </p>
+    <p>
+        <label for="weight_kg">Weight in kg:</label>
+        <input type="text" name="weight_kg" placeholder="15" value="15" />
+    </p>
+    <p>
+        <label for="sets_count">No of Sets:</label>
+        <input type="text" name="sets_count" placeholder="3" value="3" />
+    </p>
+    <p>
+        <label for="reps_count">No of Reps:</label>
+        <input type="text" name="reps_count" placeholder="8" value="8" />
+    </p>
+    <button type="submit">Save new entry</button>
+</form>
+
 <h2>Get weights</h2>
-<p>Select exercise:</p>
 <ul>
     <% for (var i = 0; i < userExercises.length; i++) { %>
         <li data-exercise-id="<%= userExercises[i].id %>">
@@ -20,21 +46,6 @@
         </li>
     <% } %>
 </ul>
-
-<h2>New entry</h2>
-<form action="/workouts" method="POST">
-    <label for="exercise_name">Exercise name:</label>
-    <input type="text" name="exercise_name" placeholder="Bench press" value="Bench press" />
-    <label for="place_name">Place:</label>
-    <input type="text" name="place_name" placeholder="Virgin Active Raffles" value="Virgin Active Raffles" />
-    <label for="weight_kg">Weight in kg:</label>
-    <input type="text" name="weight_kg" placeholder="15" value="15" />
-    <label for="sets_count">No of Sets:</label>
-    <input type="text" name="sets_count" placeholder="3" value="3" />
-    <label for="reps_count">No of Reps:</label>
-    <input type="text" name="reps_count" placeholder="8" value="8" />
-    <button type="submit">Save new entry</button>
-</form>
 
 <h2>Exercises by frequency</h2>
 <p>(dev note: make these clickable and pre-fill New entry form)</p>

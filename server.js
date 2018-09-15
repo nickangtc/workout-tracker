@@ -131,7 +131,10 @@ app.get('/api/exercises/:id', function (req, res) {
             user_id: 1,
             exercise_id: req.params.id
         },
-        order: [['created_at', 'DESC']]
+        order: [['created_at', 'DESC']],
+        include: [
+            { model: models.Place, attributes: ['id', 'name', 'type'] },
+        ]
     }).then((workouts) => {
         res.json({workouts});
     }).catch((error) => {

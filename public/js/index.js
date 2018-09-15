@@ -25,7 +25,8 @@ $(document).ready(function () {
         getLatestWorkoutEntriesByExercise(exId, results => {
             const list = $('<ul>');
             results.workouts.forEach((workout) => {
-                const text = `On ${workout.workout_date} --> ${workout.weight_kg}KG ${workout.sets_count} sets of ${workout.reps_count} reps`
+                const dateFormatted = moment(workout.workout_date).format('D MMMM');
+                const text = `on ${dateFormatted} at ${workout.Place.name} (${workout.Place.type}) --> ${workout.weight_kg}KG ${workout.sets_count} sets of ${workout.reps_count} reps`
                 list.append($('<li>').text(text));
             });
             $(this).append(list);
