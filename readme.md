@@ -33,7 +33,7 @@ What's a technical side project without learnings?
 * Seed all by running `node_modules/.bin/sequelize db:seed:all`
 * Undo all migrations by running `node_modules/.bin/sequelize db:migrate:undo:all`
 * In a query, use `attributes` to specify what fields to return and use `include` to fetch associated model instance in the same query
-* In a query with associated model instance, use `include: [{ model: Workout, attributes: [...] }]` to specify what fields to return from that model
+* In a query with associated model instance, use `include: [{ model: workout, attributes: [...] }]` to specify what fields to return from that model
 
 __Useful links for Sequelize__
 

@@ -26,7 +26,7 @@ $(document).ready(function () {
             const list = $('<ul>');
             results.workouts.forEach((workout) => {
                 const dateFormatted = moment(workout.workout_date).format('D MMMM');
-                const text = `on ${dateFormatted} at ${workout.Place.name} (${workout.Place.type}) --> ${workout.weight_kg}KG ${workout.sets_count} sets of ${workout.reps_count} reps`
+                const text = `on ${dateFormatted} at ${workout.place.name} (${workout.place.type}) --> ${workout.sets_count} x ${workout.reps_count}, ${workout.weight_kg}kg`
                 list.append($('<li>').text(text));
             });
             $(this).append(list);

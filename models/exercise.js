@@ -1,19 +1,19 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const Exercise = sequelize.define('Exercise', {
+  const exercise = sequelize.define('exercise', {
     name: DataTypes.STRING
   }, {
     timestamps: true,
     underscored: true
   });
-  Exercise.associate = function(models) {
-    Exercise.belongsTo(models.User, {
+  exercise.associate = function(models) {
+    exercise.belongsTo(models.user, {
       onDelete: "CASCADE",
       foreignKey: {
         allowNull: false
       }
     });
-    Exercise.hasMany(models.Workout);
+    exercise.hasMany(models.workout);
   };
-  return Exercise;
+  return exercise;
 };

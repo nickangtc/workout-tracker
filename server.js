@@ -29,15 +29,15 @@ const getTodaysDate = function () {
 
 // Routes
 app.get('/', function (req, res) {
-    const workoutsPromise = models.Workout.findAll({
+    const workoutsPromise = models.workout.findAll({
         where: {
             user_id: 1,
         },
         limit: 30,
         order: [['workout_date_rounded_down', 'DESC']],
         include: [
-            { model: models.Place, attributes: ['id', 'name'] },
-            { model: models.Exercise, attributes: ['id', 'name'] }
+            { model: models.place, attributes: ['id', 'name'] },
+            { model: models.exercise, attributes: ['id', 'name'] }
         ],
         attributes: [
             'workout_date',
@@ -61,11 +61,11 @@ app.get('/', function (req, res) {
         return grouped;
     });
 
-    // models.Exercise.findById(1)
+    // models.exercise.findById(1)
     //     .then(exercise => exercise.getWorkouts())
     //     .then(results => console.log(results))
     
-    const userExercisesPromise = models.User.findById(1)
+    const userExercisesPromise = models.user.findById(1)
         .then(user => user.getExercises())
         .then(exercises => {
             // TODO
@@ -90,23 +90,23 @@ app.get('/', function (req, res) {
 });
 
 app.post('/workouts', function (req, res) {
-    const exercisePromise = models.Exercise.findOrCreate({
+    const exercisePromise = models.exercise.findOrCreate({
         where: {
             user_id: 1,
             name: req.body.exercise_name
         }
     });
 
-    const placePromise = models.Place.findOrCreate({
+    const placePromise = models.place.findOrCreate({
         where: {
             name: req.body.place_name,
-            type: 'hardcoded_type'
+            type: 'gym'
         }
     });
 
     Promise.all([exercisePromise, placePromise])
         .then(([[exercise], [place]]) => {
-            return models.Workout.create({
+            return models.workout.create({
                 user_id: 1,
                 place_id: place.id,
                 exercise_id: exercise.id,
@@ -125,7 +125,7 @@ app.post('/workouts', function (req, res) {
 
 // API
 app.get('/api/exercises/:id', function (req, res) {
-    models.Workout.findAll({
+    models.workout.findAll({
         limit: req.query.entries || 3,
         where: {
             user_id: 1,
@@ -133,7 +133,7 @@ app.get('/api/exercises/:id', function (req, res) {
         },
         order: [['created_at', 'DESC']],
         include: [
-            { model: models.Place, attributes: ['id', 'name', 'type'] },
+            { model: models.place, attributes: ['id', 'name', 'type'] },
         ]
     }).then((workouts) => {
         res.json({workouts});

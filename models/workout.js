@@ -1,6 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const Workout = sequelize.define('Workout', {
+  const workout = sequelize.define('workout', {
     workout_date: DataTypes.DATE,
     workout_date_rounded_down: DataTypes.DATE,
     reps_count: DataTypes.INTEGER,
@@ -10,25 +10,25 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: true,
     underscored: true
   });
-  Workout.associate = function(models) {
-    Workout.belongsTo(models.User, {
+  workout.associate = function(models) {
+    workout.belongsTo(models.user, {
       onDelete: "CASCADE",
       foreignKey: {
         allowNull: false
       }
-    }); // enables Workout.getUser()
-    Workout.belongsTo(models.Place, {
+    }); // enables workout.getUser()
+    workout.belongsTo(models.place, {
       onDelete: "CASCADE",
       foreignKey: {
         allowNull: false
       }
     });
-    Workout.belongsTo(models.Exercise, {
+    workout.belongsTo(models.exercise, {
       onDelete: "CASCADE",
       foreignKey: {
         allowNull: false
       }
     });
   };
-  return Workout;
+  return workout;
 };

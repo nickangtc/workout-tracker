@@ -47,33 +47,38 @@
     <% } %>
 </ul>
 
+<h2>My previous workout sessions</h2>
+
+<% for (let date in workouts) { %>
+<% const _workoutsInThisDay = workouts[date] %>
+<p>
+    <%= momentjs(date).format('D MMMM (ddd)') %>:</p>
+<ul>
+    <% for (let j = 0; j < _workoutsInThisDay.length; j++) { %>
+    <% const _day = _workoutsInThisDay[j] %>
+    <li>
+        <%= _day.exercise.name %>:
+        <%= _day.sets_count %> x
+        <%= _day.reps_count %>,
+        <%= _day.weight_kg %>kg</li>
+    <% } %>
+</ul>
+<% } %>
+
 <h2>Exercises by frequency</h2>
 <p>(dev note: make these clickable and pre-fill New entry form)</p>
 <table>
     <tr>
-        <td style="background-color: yellow">Exercise 1</td>
-        <td style="background-color: red">Exercise 2</td>
-        <td style="background-color: yellow">Exercise 3</td>
+        <td style="background-color: yellow">exercise 1</td>
+        <td style="background-color: red">exercise 2</td>
+        <td style="background-color: yellow">exercise 3</td>
     </tr>
     <tr>
-        <td style="background-color: greenyellow">Exercise 4</td>
-        <td style="background-color: orange">Exercise 5</td>
+        <td style="background-color: greenyellow">exercise 4</td>
+        <td style="background-color: orange">exercise 5</td>
         <td></td>
     </tr>
 </table>
-
-<h2>My previous workouts</h2>
-
-<% for (let date in workouts) { %>
-    <% const _workoutsInThisDay = workouts[date] %>
-    <p><%= momentjs(date).format('D MMMM (ddd)') %>:</p>
-    <ul>
-        <% for (let j = 0; j < _workoutsInThisDay.length; j++) { %>
-            <% const _day = _workoutsInThisDay[j] %>
-            <li><%= _day.Exercise.name %>: <%= _day.sets_count %> x <%= _day.reps_count %> x <%= _day.weight_kg %>kg</li>
-        <% } %>
-    </ul>
-<% } %>
 
 <body>
     
