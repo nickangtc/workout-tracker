@@ -35,6 +35,11 @@ What's a technical side project without learnings?
 * In a query, use `attributes` to specify what fields to return and use `include` to fetch associated model instance in the same query
 * In a query with associated model instance, use `include: [{ model: workout, attributes: [...] }]` to specify what fields to return from that model
 
+### Deployment with Heroku
+
+* To run commands in Heroku CLI, run `heroku run <command>`. Eg. `heroku run sequelize db:migrate --env production`
+* See heroku logs if app crashes or fails to load, run `heroku logs --tail`
+
 __Useful links for Sequelize__
 
 * Sequelize's own [express example](https://github.com/sequelize/express-example)
