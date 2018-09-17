@@ -1,3 +1,4 @@
+const http = require('http');
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
@@ -141,6 +142,31 @@ app.get('/api/exercises/:id', function (req, res) {
         res.status(500).send({ error });
     });
 });
+
+// Keep alive heroku dyno
+function startKeepAlive() {
+    setInterval(() => {
+        const options = {
+            host: 'limitless-oasis-97054.herokuapp.com',
+            port: 80,
+            path: '/'
+        }
+        http
+            .get(options, (res) => {
+                res.on('data', (chunk) => {
+                    try {
+                        console.log('heroku response: ' + chunk);
+                    } catch (err) {
+                        console.log(err.message);
+                    }
+                })
+            })
+            .on('error', (err) => {
+                console.log('Error: ' + err.message);
+            });
+    }, 20* 60 * 1000);
+}
+startKeepAlive();
 
 // Run server!
 // models.sequelize.sync().then(function () {
