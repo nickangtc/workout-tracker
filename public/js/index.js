@@ -1,4 +1,5 @@
-const apiUrl = '/api';
+const apiUrl = '/api/v1';
+
 
 $(document).ready(function () {
     const handleError = function (err) {
