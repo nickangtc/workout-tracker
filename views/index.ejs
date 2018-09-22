@@ -50,19 +50,23 @@
 <h2>My previous workout sessions</h2>
 
 <% for (let date in workouts) { %>
-<% const _workoutsInThisDay = workouts[date] %>
-<p>
-    <%= momentjs(date).format('D MMMM (ddd)') %>:</p>
-<ul>
-    <% for (let j = 0; j < _workoutsInThisDay.length; j++) { %>
-    <% const _day = _workoutsInThisDay[j] %>
-    <li>
-        <%= _day.exercise.name %>:
-        <%= _day.sets_count %> x
-        <%= _day.reps_count %>,
-        <%= _day.weight_kg %>kg</li>
-    <% } %>
-</ul>
+    <% const _workoutsInThisDay = workouts[date] %>
+    <p>
+        <%= momentjs(date).format('D MMMM (ddd)') %>:
+    </p>
+    <ul>
+        <% for (let j = 0; j < _workoutsInThisDay.length; j++) { %>
+            <% const _workout = _workoutsInThisDay[j] %>
+            <li>
+                <a href="/workouts/<%= _workout.id %>/edit">
+                    <%= _workout.exercise.name %>:
+                    <%= _workout.sets_count %> x
+                    <%= _workout.reps_count %>,
+                    <%= _workout.weight_kg %>kg
+                </a>
+            </li>
+        <% } %>
+    </ul>
 <% } %>
 
 <h2>Exercises by frequency</h2>

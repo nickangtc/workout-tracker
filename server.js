@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const models = require('./models');
 const sequelize = require('sequelize');
 const momentjs = require('moment');
+const methodOverride = require('method-override');
 
 // Configurations
 if (app.get('env') === 'development') {
@@ -12,6 +13,7 @@ if (app.get('env') === 'development') {
 }
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
+app.use(methodOverride('_method'));
 app.use(bodyParser.json());       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true
@@ -41,6 +43,7 @@ app.get('/', function (req, res) {
             { model: models.exercise, attributes: ['id', 'name'] }
         ],
         attributes: [
+            'id',
             'workout_date',
             'workout_date_rounded_down',
             'reps_count',
@@ -84,10 +87,41 @@ app.get('/', function (req, res) {
             });
         })
         .catch(error => {
-            console.log('ERROR')
-            console.log(error)
             res.status(500).send({ error });
         });
+});
+
+app.get('/workouts/:id/edit', function (req, res) {
+    models.workout.findOne({
+        where: {
+            user_id: 1,
+            id: req.params.id,
+        },
+        include: [
+            { model: models.place, attributes: ['id', 'name'] },
+            { model: models.exercise, attributes: ['id', 'name'] }
+        ],
+        attributes: [
+            'id',
+            'workout_date',
+            'workout_date_rounded_down',
+            'reps_count',
+            'sets_count',
+            'weight_kg',
+        ]
+    }).then((workout) => {
+        res.render('workout/edit', { workout });
+    }).catch((err) => res.status(500).json(err));
+});
+
+app.put('/workouts/:id', function (req, res) {
+    models.workout.update(req.body, {
+        where: {
+            id: req.params.id,
+        }
+    }).then((workout) => {
+        res.redirect('/');
+    }).catch((err) => res.status(500).json(err));
 });
 
 app.post('/workouts', function (req, res) {
@@ -171,4 +205,6 @@ startKeepAlive();
 // Run server!
 // models.sequelize.sync().then(function () {
 // });
-app.listen(process.env.PORT || 3000);
+app.listen(process.env.PORT || 3000, () => {
+    console.info('Local dev on http://localhost:3000/');
+});

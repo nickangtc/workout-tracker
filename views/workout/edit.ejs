@@ -1,0 +1,23 @@
+<form action="/workouts/<%= workout.id %>?_method=PUT" method="POST">
+    <p>
+        <label for="exercise_name">Exercise name:</label>
+        <%= workout.exercise.name %>
+    </p>
+    <p>
+        <label for="place_name">Place:</label>
+        <%= workout.place.name %>
+    </p>
+    <p>
+        <label for="weight_kg">Weight in kg:</label>
+        <input type="text" name="weight_kg" placeholder="15" value="<%= workout.weight_kg %>" />
+    </p>
+    <p>
+        <label for="sets_count">No of Sets:</label>
+        <input type="text" name="sets_count" placeholder="3" value="<%= workout.sets_count %>" />
+    </p>
+    <p>
+        <label for="reps_count">No of Reps:</label>
+        <input type="text" name="reps_count" placeholder="8" value="<%= workout.reps_count %>" />
+    </p>
+    <button type="submit">Save edits</button>
+</form>
