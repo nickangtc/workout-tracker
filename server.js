@@ -3,15 +3,16 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const models = require('./models');
-const sequelize = require('sequelize');
 const momentjs = require('moment');
 const methodOverride = require('method-override');
+const ejsLayouts = require('express-ejs-layouts');
 
 // Configurations
 if (app.get('env') === 'development') {
     app.use(require('morgan')('dev'));
 }
 app.set('view engine', 'ejs');
+app.use(ejsLayouts);
 app.use(express.static(__dirname + '/public'));
 app.use(methodOverride('_method'));
 app.use(bodyParser.json());       // to support JSON-encoded bodies

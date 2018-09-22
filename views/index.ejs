@@ -1,18 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Hello</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="css/index.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js" integrity="sha256-59IZ5dbLyByZgSsRE3Z0TjDuX7e1AiqW5bZ8Bg50dsU="
-        crossorigin="anonymous"></script>
-    <script src="js/index.js"></script>
-</head>
-
 <h2>New entry</h2>
 <form action="/workouts" method="POST">
     <p>
@@ -44,7 +29,7 @@
         <li data-exercise-id="<%= userExercises[i].id %>">
             <%= userExercises[i].name %>
         </li>
-    <% } %>
+        <% } %>
 </ul>
 
 <h2>My previous workout sessions</h2>
@@ -83,8 +68,3 @@
         <td></td>
     </tr>
 </table>
-
-<body>
-    
-</body>
-</html>
