@@ -12,7 +12,7 @@ const keepHerokuAlive = function () {
             .get(options, (res) => {
                 res.on('data', (chunk) => {
                     try {
-                        console.log('heroku response: ' + chunk);
+                        console.log('keeping alive');
                     } catch (err) {
                         console.log(err.message);
                     }

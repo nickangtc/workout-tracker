@@ -3,6 +3,8 @@ const router = express.Router();
 const models = require('../models');
 const momentjs = require('moment');
 
+const format_UTC = 'YYYY-MM-DD HH:mm Z';
+
 
 router.get('/', (req, res) => {
     const workoutsPromise = models.workout.findAll({
@@ -53,10 +55,13 @@ router.get('/', (req, res) => {
     Promise.all([workoutsPromise, userExercisesPromise])
         .then(([workouts, userExercises]) => {
             // res.json({ workouts, userExercises });
+            console.log('workouts:')
+            console.log(workouts)
             res.render('index', {
                 momentjs,
                 workouts,
                 userExercises,
+                format_UTC,
             });
         })
         .catch(error => {

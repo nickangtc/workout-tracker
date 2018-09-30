@@ -4,10 +4,14 @@ const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const ejsLayouts = require('express-ejs-layouts');
 
+const { timezone } = require('./config/global_config');
 const workoutRoutes = require('./routes/workout');
 const indexRoutes = require('./routes/index');
 const apiV1Routes = require('./routes/api_v1');
 const { keepHerokuAlive } = require('./util/heroku');
+
+// Server configurations
+process.env.TZ = timezone;
 
 // Configurations
 if (app.get('env') === 'development') {

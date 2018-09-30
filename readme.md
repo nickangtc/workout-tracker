@@ -43,3 +43,8 @@ What's a technical side project without learnings?
 __Useful links for Sequelize__
 
 * Sequelize's own [express example](https://github.com/sequelize/express-example)
+
+### Environment variables
+
+* [dotenv](https://github.com/motdotla/dotenv) package only allows you to set new environment variables in a separate, uncommitted .env file ([issue](https://github.com/motdotla/dotenv/issues/199)). Overwriting is not possible without writing some JavaScript in the main server.js file. That's kind of stupid, but it is what it is. 
+* For something non-secret, the simplest way to set env variables (and overwrite existing value) is `process.env.TZ = 'UTC'`

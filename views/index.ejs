@@ -37,6 +37,7 @@
 <% for (let date in workouts) { %>
     <% const _workoutsInThisDay = workouts[date] %>
     <p>
+        <%= date %>
         <%= momentjs(date).format('D MMMM (ddd)') %>:
     </p>
     <ul>
