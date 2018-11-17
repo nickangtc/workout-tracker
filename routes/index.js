@@ -55,8 +55,6 @@ router.get('/', (req, res) => {
     Promise.all([workoutsPromise, userExercisesPromise])
         .then(([workouts, userExercises]) => {
             // res.json({ workouts, userExercises });
-            console.log('workouts:')
-            console.log(workouts)
             res.render('index', {
                 momentjs,
                 workouts,

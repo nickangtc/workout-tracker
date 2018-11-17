@@ -9,12 +9,26 @@ $(document).ready(function () {
         $('body').append(message);
     }
 
-    const getLatestWorkoutEntriesByExercise = function (exId, done) {
+    const getLatestWorkoutEntriesByExercise = (exId, done) => {
         $.ajax({
-            method: 'get',
+            method: 'GET',
             url: `${apiUrl}/exercises/${exId}`,
             data: {
                 entries: 3
+            },
+            success: (results) => done(results),
+            error: (error) => handleError(error)
+        });
+    }
+
+    const getWorkoutSessions = () => {
+        const timezoneString = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        $.ajax({
+            method: 'GET',
+            url: `${apiUrl}/exercises/${exId}`,
+            data: {
+                timezoneString,
+                days: 5,
             },
             success: (results) => done(results),
             error: (error) => handleError(error)

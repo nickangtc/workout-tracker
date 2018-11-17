@@ -2,7 +2,7 @@
 <form action="/workouts" method="POST">
     <p>
         <label for="exercise_name">Exercise name:</label>
-        <input type="text" name="exercise_name" placeholder="Bench press" value="Bench press" />
+        <input type="text" name="exercise_name" placeholder="Bench press" />
     </p>
     <p>
         <label for="place_name">Place:</label>
@@ -10,7 +10,7 @@
     </p>
     <p>
         <label for="weight_kg">Weight in kg:</label>
-        <input type="text" name="weight_kg" placeholder="15" value="15" />
+        <input type="text" name="weight_kg" placeholder="15" />
     </p>
     <p>
         <label for="sets_count">No of Sets:</label>
@@ -37,7 +37,6 @@
 <% for (let date in workouts) { %>
     <% const _workoutsInThisDay = workouts[date] %>
     <p>
-        <%= date %>
         <%= momentjs(date).format('D MMMM (ddd)') %>:
     </p>
     <ul>
