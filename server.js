@@ -8,7 +8,7 @@ const { timezone } = require('./config/global_config');
 const workoutRoutes = require('./routes/workout');
 const indexRoutes = require('./routes/index');
 const apiV1Routes = require('./routes/api_v1');
-const { keepHerokuAlive } = require('./util/heroku');
+// const { keepHerokuAlive } = require('./util/heroku');
 
 // Server configurations
 process.env.TZ = timezone;
@@ -41,4 +41,4 @@ app.listen(process.env.PORT || 3000, () => {
 });
 
 // Keep alive heroku dyno
-keepHerokuAlive();
+// keepHerokuAlive();

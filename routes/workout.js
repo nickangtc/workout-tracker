@@ -6,7 +6,6 @@ const { getTodaysDate } = require('../util/date');
 
 
 router.get('/:id/edit', (req, res) => {
-    console.log('LOAD BOOTY EDIT')
     models.workout.findOne({
         where: {
             user_id: 1,
